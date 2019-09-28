@@ -1,5 +1,12 @@
 # Getting Started
 
+## What is it
+Ever have a folder full of json files that you hate writing in? Rather write in yaml and have that folder instantly converted to json for your lame json accepting project? Use this. 
+
+This will watch all files in an "in" folder containing yaml files and then delete all files in an "out" folder and replace them with json files.
+
+Yaml "in" directory may contain sub folders. 
+
 ## Install it
 
 ```
