@@ -105,8 +105,6 @@ async function rebuild() {
     console.log("Begining build...");
     build();
     console.log("Build finished!");
-
-
   } catch (err) {
     console.log("Fatal error");
     console.log(err.message);
@@ -115,5 +113,6 @@ async function rebuild() {
 }
 
 setInterval(() => { }, 1 << 30);
+build();
 watch();
 
