@@ -6,12 +6,20 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "net8floz",
-  "license": "ISC",
   "dependencies": {
     "chokidar": "^3.1.1",
     "fs-extra": "^8.1.0",
     "js-yaml": "^3.13.1",
     "normalize-path": "^3.0.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/net8floz/yamljsonwatcherconverter.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/net8floz/yamljsonwatcherconverter/issues"
+  },
+  "homepage": "https://github.com/net8floz/yamljsonwatcherconverter#readme"
 }
