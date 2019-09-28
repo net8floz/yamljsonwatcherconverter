@@ -31,7 +31,6 @@ function validateProcess() {
 }
 
 function watch() {
-  validateProcess();
   chokidar
     .watch(config.inPath, {
       ignored: /^\./,
@@ -113,6 +112,7 @@ async function rebuild() {
 }
 
 setInterval(() => { }, 1 << 30);
+validateProcess();
 build();
 watch();
 
