@@ -45,7 +45,7 @@ By default this application will only tell you what it intends to do. Create you
 If everything looks good run the command with the force argument to allow file system changes
 
 ```
-yamljsonwatcherconver --force
+yamljsonwatcherconverter --force
 ```
 
 ## Don't be a dummy
