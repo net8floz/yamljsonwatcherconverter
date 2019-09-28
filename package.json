@@ -1,10 +1,13 @@
 {
   "name": "yamljsonwatcherconverter",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "File watching utility that converts yaml directories into json ones",
   "main": "src/yamljsonwatcherconverter.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "yamljsonwatcherconverter": "./bin/index.js"
   },
   "dependencies": {
     "chokidar": "^3.1.1",
