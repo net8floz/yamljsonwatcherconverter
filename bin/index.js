@@ -6,7 +6,11 @@ const fsExtra = require('fs-extra')
 const jsYaml = require('js-yaml');
 const process = require('process');
 var processArgs = process.argv.slice(2);
-const normalize = require('normalize-path');
+const _normalize = require('normalize-path');
+
+function normalize(_p) {
+  return path.normalize(_normalize(_p));
+}
 
 function validateProcess() {
   if (!fsExtra.pathExistsSync("yamljsonwatcherconverter.json")) {
@@ -82,27 +86,35 @@ function gatherFiles(dir) {
 
 function build() {
   const paths = gatherFiles(config.inPath);
+
   for (const inFilePath of paths) {
     if (!inFilePath.indexOf('.yaml') && !inFilePath.indexOf('.yml')) {
       continue;
     }
-    const outFilePath = inFilePath.replace(config.inPath, config.outPath).replace('.yaml', '.json').replace('.yml', '.json');
+    const inReplace = config.inPath.replace('./', '');
+    const outReplace = config.outPath.replace('./', '');
+    const outFilePath = inFilePath.replace(inReplace, outReplace).replace('.yaml', '.json').replace('.yml', '.json');
     const outDirPath = path.dirname(outFilePath);
     fsExtra.ensureDirSync(outDirPath);
 
     const yaml = jsYaml.safeLoad(fs.readFileSync(inFilePath, 'utf8'));
     const json = JSON.stringify(yaml);
-    fs.writeFileSync(outFilePath, json, 'utf8');
-    console.log("Created " + outFilePath);
+    if (processArgs[0] == '--force') {
+      fs.writeFileSync(outFilePath, json, 'utf8');
+      console.log("Created " + outFilePath);
+    } else {
+      console.log("I would like to create " + outFilePath);
+      console.log("Run command with --force to actually do it");
+    } 
   }
 }
 
 async function rebuild() {
   try {
-    validateProcess();
-    clearOutPath();
     console.log(" ");
     console.log("Begining build...");
+    validateProcess();
+    clearOutPath();
     build();
     console.log("Build finished!");
   } catch (err) {
@@ -114,6 +126,6 @@ async function rebuild() {
 
 setInterval(() => { }, 1 << 30);
 validateProcess();
-build();
+rebuild();
 watch();
 
