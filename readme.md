@@ -11,7 +11,6 @@ Yaml "in" directory may contain sub folders.
 
 ```
 cd myAwesome/Project
-npm init
 npm install -g yamljsonwatcherconverter 
 ```
 
@@ -19,14 +18,13 @@ npm install -g yamljsonwatcherconverter
 
 Example folder structure:
 ```
-- .packages.json
 - in
 -- myFile.yaml
 - out
 - yamljsonwatcherconverter.json <--- create this one 
 ```
 
-Example config file
+Example config file. Config should be in the same dir you execute this package in.
 ```
 {
     inPath: './in',
