@@ -4,7 +4,7 @@ const chokidar = require('chokidar');
 const fsExtra = require('fs-extra')
 const jsYaml = require('js-yaml');
 const process = require('process');
-var processArgs = process.argv.slice(2);
+const processArgs = process.argv.slice(2);
 
 function validateProcess() {
   if (!fsExtra.pathExistsSync("yamljsonwatcherconverter.json")) {
@@ -85,7 +85,8 @@ function build() {
   const paths = gatherFiles(config.inPath);
 
   for (const inFilePath of paths) {
-    if (!inFilePath.indexOf('.yaml') && !inFilePath.indexOf('.yml')) {
+    const ext = path.extname(inFilePath);
+    if (ext != ".yaml" && ext != ".yml") {
       continue;
     }
 
