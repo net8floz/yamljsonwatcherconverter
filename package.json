@@ -1,12 +1,11 @@
 {
   "name": "yamljsonwatcherconverter",
-  "version": "1.1.11",
+  "version": "1.1.12",
   "description": "File watching utility that converts yaml directories into json ones",
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "cd scripts && node build && cd ..",
-    "publish": "npm version patch && npm publish",
     "globaltest": "cd test && npm install -g yamljsonwatcherconverter && yamljsonwatcherconverter --force && cd .."
   },
   "bin": "./bin/index.js",
