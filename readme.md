@@ -7,6 +7,8 @@ This will watch all files in an "in" folder containing yaml files and then delet
 
 Yaml "in" directory may contain sub folders. 
 
+**Does not support in folder and out folder being the same. Please raise an issue for this feature if you need it**
+
 ## Install it
 
 ```
