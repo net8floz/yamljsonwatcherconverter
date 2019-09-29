@@ -28,7 +28,8 @@ Example config file. Config should be in the same dir you execute this package i
 ```
 {
     inPath: './in',
-    outPath: './out'
+    outPath: './out',
+    prettify: false
 }
 ```
 
