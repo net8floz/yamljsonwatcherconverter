@@ -6,11 +6,6 @@ const fsExtra = require('fs-extra')
 const jsYaml = require('js-yaml');
 const process = require('process');
 var processArgs = process.argv.slice(2);
-const _normalize = require('normalize-path');
-
-function normalize(_p) {
-  return path.normalize(_normalize(_p));
-}
 
 function validateProcess() {
   if (!fsExtra.pathExistsSync("yamljsonwatcherconverter.json")) {
@@ -27,8 +22,11 @@ function validateProcess() {
     throw new Error("No output path found");
   }
 
-  config.inPath = normalize(config.inPath);
-  config.outPath = normalize(config.outPath);
+  config.inPath = path.resolve(config.inPath); // normalize(config.inPath);
+  config.outPath = path.resolve(config.outPath); ///normalize(config.outPath);
+
+  console.log("In: " + config.inPath);
+  console.log("Out: " + config.outPath);
 
   if (!fsExtra.pathExistsSync(config.inPath)) {
     throw new Error("No source found at " + config.inPath);
@@ -61,7 +59,7 @@ function clearOutPath() {
     const paths = gatherFiles(config.outPath);
     console.log("I will destroy everything at " + config.outPath);
     for (const p of paths) {
-      console.log("rm " + p);
+      console.log("rm " + path.resolve(p));
     }
     console.log("");
     console.log("Run this command with --force to let this happen");
@@ -78,7 +76,7 @@ function gatherFiles(dir) {
     if (fsExtra.lstatSync(filePath).isDirectory()) {
       paths = paths.concat(gatherFiles(filePath));
     } else {
-      paths.push(normalize(filePath));
+      paths.push(path.resolve(filePath));
     }
   }
   return paths;
@@ -91,21 +89,26 @@ function build() {
     if (!inFilePath.indexOf('.yaml') && !inFilePath.indexOf('.yml')) {
       continue;
     }
-    const inReplace = config.inPath.replace('./', '');
-    const outReplace = config.outPath.replace('./', '');
-    const outFilePath = inFilePath.replace(inReplace, outReplace).replace('.yaml', '.json').replace('.yml', '.json');
+
+    const outFilePath = inFilePath.replace(config.inPath, config.outPath).replace('.yaml', '.json').replace('.yml', '.json');
     const outDirPath = path.dirname(outFilePath);
     fsExtra.ensureDirSync(outDirPath);
 
     const yaml = jsYaml.safeLoad(fs.readFileSync(inFilePath, 'utf8'));
-    const json = JSON.stringify(yaml);
+    let json = null;
+    if (config.prettify) {
+      json = JSON.stringify(yaml, null, 4);
+    } else {
+      json = JSON.stringify(yaml);
+    }
+
     if (processArgs[0] == '--force') {
       fs.writeFileSync(outFilePath, json, 'utf8');
       console.log("Created " + outFilePath);
     } else {
       console.log("I would like to create " + outFilePath);
       console.log("Run command with --force to actually do it");
-    } 
+    }
   }
 }
 
