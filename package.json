@@ -19,7 +19,7 @@
     "url": "git+https://github.com/net8floz/yamljsonwatcherconverter.git"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/net8floz/yamljsonwatcherconverter/issues"
   },
