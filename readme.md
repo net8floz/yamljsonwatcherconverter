@@ -38,6 +38,11 @@ Example config file. Config should be in the same dir you execute this package i
 yamljsonwatcherconverter
 ```
 
+## Update it
+```
+npm install -g yamljsonwatcherconverter
+```
+
 ## Take note 
 By default this application will only tell you what it intends to do. Create your config and then run the command. Read the output to make sure everything looks okay
 
