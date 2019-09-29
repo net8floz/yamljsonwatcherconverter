@@ -1,6 +1,6 @@
 {
   "name": "yamljsonwatcherconverter",
-  "version": "1.1.9",
+  "version": "1.1.10",
   "description": "File watching utility that converts yaml directories into json ones",
   "main": "src/index.js",
   "scripts": {
